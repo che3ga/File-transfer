@@ -1,0 +1,584 @@
+Sub CompareClass()
+'
+'
+'This script compares classifications exported from SAP transaction /BRG/G_MATMAS_DOWNL.
+'
+'It was created by Spencer Clary (DCUS, Fountain Inn).
+'
+ 
+Dim s As String
+'s = Application.International(xlListSeparator)
+ 
+s = ","
+ 
+ 
+Application.ScreenUpdating = False
+Application.Calculation = xlManual
+ 
+ 
+Dim lastrow As Long
+Dim PNs As String
+ 
+ 
+lastrow = Range("D990000").End(xlUp).Row
+ 
+   Columns("A:C").Select
+   Selection.Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
+  
+ 
+   Sheets.Add After:=ActiveSheet
+  
+   Range("B1").FormulaR1C1 = "=IFERROR(INDEX(Sheet1!C4" + s + "MATCH(COLUMN()-COLUMN(R1C1)" + s + "Sheet1!C1" + s + "0))" + s + """"")"
+   Range("B2").FormulaR1C1 = "=IFERROR(INDEX(Sheet1!C6" + s + "MATCH(COLUMN()-COLUMN(R1C1)" + s + "Sheet1!C1" + s + "0))" + s + """"")"
+   Range("A4").FormulaR1C1 = "=SUBSTITUTE(SUBSTITUTE(IFERROR(""|""&INDEX(Sheet1!C[20]" + s + "MATCH(ROW()-4" + s + "Sheet1!C[2])+1)&""|""" + s + """"")" + s + """|0|""" + s + """"")" + s + """|""" + s + """"")"
+   Range("B4").FormulaR1C1 = "=IFERROR(INDEX(Sheet1!C22" + s + "MATCH((COLUMN()-COLUMN(R1C1))&""-""&RC1" + s + "Sheet1!C2" + s + "0))" + s + """"")"
+  
+   
+   Range("B1:B4").Select
+   Selection.AutoFill Destination:=Range("B1:D4"), Type:=xlFillDefault
+  
+   Range("A4:D4").Select
+   Selection.AutoFill Destination:=Range("A4:D500"), Type:=xlFillDefault
+ 
+  
+   
+ 
+   Cells.Select
+   With Selection.Font
+       .Name = "GlobalFont_BOS"
+       .Size = 10
+       .Strikethrough = False
+       .Superscript = False
+       .Subscript = False
+       .OutlineFont = False
+       .Shadow = False
+       .Underline = xlUnderlineStyleNone
+       .ColorIndex = xlAutomatic
+       .TintAndShade = 0
+       .ThemeFont = xlThemeFontNone
+   End With
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+   Columns("A:A").Select
+   With Selection.Interior
+       .Pattern = xlSolid
+       .PatternColorIndex = xlAutomatic
+       .Color = 4593408
+       .TintAndShade = 0
+       .PatternTintAndShade = 0
+   End With
+   With Selection.Font
+       .Color = -16727809
+       .TintAndShade = 0
+       .Size = 12
+   End With
+   Selection.Borders(xlDiagonalDown).LineStyle = xlNone
+   Selection.Borders(xlDiagonalUp).LineStyle = xlNone
+   With Selection.Borders(xlEdgeLeft)
+       .LineStyle = xlContinuous
+       .ThemeColor = 2
+       .TintAndShade = 0.499984740745262
+       .Weight = xlThin
+   End With
+   With Selection.Borders(xlEdgeTop)
+       .LineStyle = xlContinuous
+       .ThemeColor = 2
+       .TintAndShade = 0.499984740745262
+       .Weight = xlThin
+   End With
+   With Selection.Borders(xlEdgeBottom)
+       .LineStyle = xlContinuous
+       .ThemeColor = 2
+       .TintAndShade = 0.499984740745262
+       .Weight = xlThin
+   End With
+   With Selection.Borders(xlEdgeRight)
+       .LineStyle = xlContinuous
+       .ThemeColor = 2
+       .TintAndShade = 0.499984740745262
+       .Weight = xlThin
+   End With
+   Selection.Borders(xlInsideVertical).LineStyle = xlNone
+   With Selection.Borders(xlInsideHorizontal)
+       .LineStyle = xlContinuous
+       .ThemeColor = 2
+       .TintAndShade = 0.499984740745262
+       .Weight = xlThin
+   End With
+ 
+  
+   
+ 
+  
+   
+   
+   
+   
+   
+   Range("A1:A3").Select
+   With Selection.Interior
+       .Pattern = xlSolid
+       .PatternColorIndex = xlAutomatic
+       .ThemeColor = xlThemeColorLight1
+       .TintAndShade = 0
+       .PatternTintAndShade = 0
+   End With
+ 
+   Selection.Borders(xlDiagonalDown).LineStyle = xlNone
+   Selection.Borders(xlDiagonalUp).LineStyle = xlNone
+   With Selection.Borders(xlEdgeLeft)
+       .LineStyle = xlContinuous
+       .ThemeColor = 2
+       .TintAndShade = 0.499984740745262
+       .Weight = xlThin
+   End With
+   With Selection.Borders(xlEdgeTop)
+       .LineStyle = xlContinuous
+       .ThemeColor = 2
+       .TintAndShade = 0.499984740745262
+       .Weight = xlThin
+   End With
+   With Selection.Borders(xlEdgeBottom)
+       .LineStyle = xlContinuous
+       .ThemeColor = 2
+       .TintAndShade = 0.499984740745262
+       .Weight = xlThin
+   End With
+   With Selection.Borders(xlEdgeRight)
+       .LineStyle = xlContinuous
+       .ThemeColor = 2
+       .TintAndShade = 0.499984740745262
+       .Weight = xlThin
+   End With
+   Selection.Borders(xlInsideVertical).LineStyle = xlNone
+   Selection.Borders(xlInsideHorizontal).LineStyle = xlNone
+  
+   
+   
+   
+   
+ 
+  
+   Range("B4").Select
+   ActiveWindow.FreezePanes = True
+  
+   Range("C4").Select
+   Range(Selection, Selection.End(xlToRight)).Select
+   Range(Selection, Selection.End(xlDown)).Select
+   Selection.FormatConditions.Add Type:=xlExpression, Formula1:="=C4<>$B4"
+   Selection.FormatConditions(Selection.FormatConditions.Count).SetFirstPriority
+   With Selection.FormatConditions(1).Interior
+       .PatternColorIndex = xlAutomatic
+       .ThemeColor = xlThemeColorAccent4
+       .TintAndShade = 0.599963377788629
+   End With
+   With Selection.FormatConditions(1).Font
+       .Color = -16777024
+       .TintAndShade = 0
+   End With
+  
+   
+   Selection.FormatConditions(1).StopIfTrue = False
+  
+ 
+ 
+   With Selection.FormatConditions(1).Borders(xlEdgeLeft)
+       .ThemeColor = 2
+       .TintAndShade = 0
+   End With
+   With Selection.FormatConditions(1).Borders(xlEdgeTop)
+       .ThemeColor = 2
+       .TintAndShade = 0
+   End With
+   With Selection.FormatConditions(1).Borders(xlEdgeBottom)
+ 
+       .ThemeColor = 2
+       .TintAndShade = 0
+   End With
+   With Selection.FormatConditions(1).Borders(xlEdgeRight)
+       .ThemeColor = 2
+       .TintAndShade = 0
+   End With
+ 
+ 
+ 
+  
+       Sheets.Add After:=ActiveSheet
+       Range("B2").Select
+       ActiveCell.FormulaR1C1 = "PN Order"
+       Range("C2").Select
+       ActiveCell.FormulaR1C1 = "Model Code"
+       Range("D2").Select
+       ActiveCell.FormulaR1C1 = "Estimated Difference"
+ 
+  
+ 
+   
+   
+   Range("A3").Select
+   ActiveCell.FormulaR1C1 = "compare against - ->"
+  
+ 
+   With Selection.Interior
+       .Pattern = xlSolid
+       .PatternColorIndex = xlAutomatic
+       .Color = 15773696
+       .TintAndShade = 0
+       .PatternTintAndShade = 0
+   End With
+  
+   
+   
+   
+   
+   
+ 
+   Columns("B:D").Select
+   With Selection.Interior
+       .PatternColorIndex = xlAutomatic
+       .ThemeColor = xlThemeColorAccent1
+       .TintAndShade = 0.799981688894314
+       .PatternTintAndShade = 0
+   End With
+   Selection.Borders(xlDiagonalDown).LineStyle = xlNone
+   Selection.Borders(xlDiagonalUp).LineStyle = xlNone
+   With Selection.Borders(xlEdgeLeft)
+       .LineStyle = xlContinuous
+       .ColorIndex = 0
+       .TintAndShade = 0
+       .Weight = xlThin
+   End With
+   With Selection.Borders(xlEdgeTop)
+       .LineStyle = xlContinuous
+       .ColorIndex = 0
+       .TintAndShade = 0
+       .Weight = xlThin
+   End With
+   With Selection.Borders(xlEdgeBottom)
+       .LineStyle = xlContinuous
+       .ColorIndex = 0
+       .TintAndShade = 0
+       .Weight = xlThin
+   End With
+   With Selection.Borders(xlEdgeRight)
+       .LineStyle = xlContinuous
+       .ColorIndex = 0
+       .TintAndShade = 0
+      .Weight = xlThin
+   End With
+   With Selection.Borders(xlInsideVertical)
+       .LineStyle = xlContinuous
+       .ColorIndex = 0
+       .TintAndShade = 0
+       .Weight = xlThin
+   End With
+   With Selection.Borders(xlInsideHorizontal)
+       .LineStyle = xlContinuous
+       .ColorIndex = 0
+       .TintAndShade = 0
+       .Weight = xlThin
+   End With
+  
+   
+   
+   Range("B2:D2").Select
+       Selection.Font.Bold = True
+   With Selection.Interior
+       .Pattern = xlSolid
+       .PatternColorIndex = xlAutomatic
+       .ThemeColor = xlThemeColorLight1
+       .TintAndShade = 0
+       .PatternTintAndShade = 0
+   End With
+   With Selection.Font
+       .ThemeColor = xlThemeColorDark1
+       .TintAndShade = 0
+   End With
+ 
+   Columns("A:A").Select
+   Columns("A:A").EntireColumn.AutoFit
+   Columns("B:B").ColumnWidth = 11.89
+   Columns("C:C").ColumnWidth = 20.56
+   Columns("D:D").ColumnWidth = 38.33
+  
+   Range("B3").Select
+ 
+  
+   
+   
+   
+   
+   
+   
+   Sheets("Sheet1").Name = "SAP_Data"
+   Sheets("Sheet3").Name = "Sort"
+   Sheets("Sheet2").Name = "Compare_Classification"
+   Sheets("Compare_Classification").Move After:=Sheets(3)
+   Sheets("Sort").Select
+   With ActiveWorkbook.Sheets("Sort").Tab
+       .ThemeColor = xlThemeColorAccent1
+       .TintAndShade = 0.799981688894314
+   End With
+  
+   With ActiveWorkbook.Sheets("Compare_Classification").Tab
+       .Color = 6374438
+       .TintAndShade = 0
+   End With
+  
+   
+   
+   
+   
+   
+   
+   Sheets("SAP_Data").Select
+   Range("A2").FormulaR1C1 = "=IFERROR(MATCH(RC[3]" + s + "Sort!C2" + s + "0)-2" + s + "IF(R[-1]C[3]=RC[3]" + s + "R[-1]C" + s + "R[-1]C+IF(R[-1]C>COUNTA(Sort!C[1])" + s + "1" + s + "COUNTA(Sort!C[1]))))"
+   Range("B2").FormulaR1C1 = "=RC[-1]&""-""&RC[19]"
+   Range("C2").FormulaR1C1 = "=R[-1]C+(COUNTIF(R1C[18]:RC[18]" + s + "RC[18])=1)"
+  
+   
+   
+   Range("A2:C2").Select
+   Selection.AutoFill Destination:=Range("A2:C" & lastrow)
+  
+   
+   
+   Sheets("Compare_Classification").Select
+   Range("B3").Select
+   ActiveCell.FormulaR1C1 = "=IFERROR(IF(INDEX(Sort!C4" + s + "MATCH(R1C" + s + "Sort!C2" + s + "0))=""""" + s + """""" + s + "INDEX(Sort!C4" + s + "MATCH(R1C" + s + "Sort!C2" + s + "0)))" + s + """"")"
+   Selection.AutoFill Destination:=Range("B3:D3"), Type:=xlFillDefault
+ 
+  
+   
+  
+   
+ 
+      
+   Range("B4:D11").Select
+   Range(Selection, Selection.End(xlDown)).Select
+  
+ 
+       Selection.Font.Bold = True
+   Selection.Borders(xlDiagonalDown).LineStyle = xlNone
+   Selection.Borders(xlDiagonalUp).LineStyle = xlNone
+   With Selection.Borders(xlEdgeLeft)
+       .LineStyle = xlContinuous
+       .ThemeColor = 2
+       .TintAndShade = 0.499984740745262
+       .Weight = xlThin
+   End With
+   With Selection.Borders(xlEdgeTop)
+       .LineStyle = xlContinuous
+       .ThemeColor = 2
+       .TintAndShade = 0.499984740745262
+       .Weight = xlThin
+   End With
+   With Selection.Borders(xlEdgeBottom)
+       .LineStyle = xlContinuous
+       .ThemeColor = 2
+       .TintAndShade = 0.499984740745262
+       .Weight = xlThin
+   End With
+   With Selection.Borders(xlEdgeRight)
+       .LineStyle = xlContinuous
+       .ThemeColor = 2
+       .TintAndShade = 0.499984740745262
+       .Weight = xlThin
+   End With
+   With Selection.Borders(xlInsideVertical)
+       .LineStyle = xlContinuous
+       .ThemeColor = 2
+       .TintAndShade = 0.499984740745262
+       .Weight = xlThin
+   End With
+   With Selection.Borders(xlInsideHorizontal)
+       .LineStyle = xlContinuous
+       .ThemeColor = 2
+       .TintAndShade = 0.499984740745262
+       .Weight = xlThin
+   End With
+  
+   
+ 
+   With Selection.Interior
+       .Pattern = xlSolid
+       .PatternColorIndex = xlAutomatic
+       .ThemeColor = xlThemeColorDark1
+       .TintAndShade = -4.99893185216834E-02
+       .PatternTintAndShade = 0
+   End With
+  
+   
+   
+   
+   
+ 
+  
+     
+   
+   Range("B1:D1").Select
+ 
+   With Selection.Interior
+       .Pattern = xlSolid
+       .PatternColorIndex = xlAutomatic
+       .Color = 6374438
+       .TintAndShade = 0
+       .PatternTintAndShade = 0
+   End With
+   With Selection
+       .HorizontalAlignment = xlCenter
+       .VerticalAlignment = xlTop
+       .WrapText = False
+       .Orientation = 0
+       .AddIndent = False
+       .IndentLevel = 0
+       .ShrinkToFit = False
+       .ReadingOrder = xlContext
+       .MergeCells = False
+   End With
+   With Selection.Font
+       .ThemeColor = xlThemeColorAccent1
+       .TintAndShade = 0.599993896298105
+       .Size = 12
+       .Color = -13253
+   End With
+  
+   
+   
+   
+   
+   
+       
+   Range("B2:D2").Select
+   With Selection.Interior
+       .Pattern = xlSolid
+       .PatternColorIndex = xlAutomatic
+       .ThemeColor = xlThemeColorLight1
+       .TintAndShade = 0
+       .PatternTintAndShade = 0
+   End With
+ 
+   With Selection.Font
+       .ThemeColor = xlThemeColorDark1
+       .TintAndShade = 0
+       .Size = 11
+   End With
+ 
+   Selection.Borders(xlDiagonalDown).LineStyle = xlNone
+  Selection.Borders(xlDiagonalUp).LineStyle = xlNone
+   With Selection.Borders(xlEdgeLeft)
+       .LineStyle = xlContinuous
+       .ThemeColor = 2
+       .TintAndShade = 0.499984740745262
+       .Weight = xlThin
+   End With
+   With Selection.Borders(xlEdgeTop)
+       .LineStyle = xlContinuous
+       .ThemeColor = 2
+       .TintAndShade = 0.499984740745262
+       .Weight = xlThin
+   End With
+   With Selection.Borders(xlEdgeBottom)
+       .LineStyle = xlContinuous
+       .ThemeColor = 2
+       .TintAndShade = 0.499984740745262
+       .Weight = xlThin
+   End With
+   With Selection.Borders(xlEdgeRight)
+       .LineStyle = xlContinuous
+       .ThemeColor = 2
+       .TintAndShade = 0.499984740745262
+       .Weight = xlThin
+   End With
+   With Selection.Borders(xlInsideVertical)
+       .LineStyle = xlContinuous
+       .ThemeColor = 2
+       .TintAndShade = 0.499984740745262
+       .Weight = xlThin
+   End With
+   Selection.Borders(xlInsideHorizontal).LineStyle = xlNone
+  
+   
+   
+   
+   
+   
+       Range("B3:D3").Select
+ 
+   With Selection.Font
+       .ThemeColor = xlThemeColorDark1
+       .TintAndShade = 0
+   End With
+   With Selection
+       .HorizontalAlignment = xlLeft
+       .VerticalAlignment = xlTop
+       .WrapText = False
+       .Orientation = 0
+       .AddIndent = False
+       .IndentLevel = 0
+       .ShrinkToFit = False
+       .ReadingOrder = xlContext
+       .MergeCells = False
+   End With
+  
+   
+ 
+   With Selection.Interior
+       .Pattern = xlSolid
+       .PatternColorIndex = xlAutomatic
+       .ThemeColor = xlThemeColorLight1
+       .TintAndShade = 0.499984740745262
+       .PatternTintAndShade = 0
+   End With
+  
+   
+   
+ 
+   Application.Calculation = xlAutomatic
+ 
+ 
+   Columns("A:F").EntireColumn.AutoFit
+   Range("B4").Select
+   
+   
+   Sheets("SAP_Data").Select
+  
+   PNs = Range("A650000").End(xlUp).Value
+   Sheets("Compare_Classification").Select
+     
+   Range("D:D").Select
+ 
+   If (PNs < 3) Then
+       Selection.Delete Shift:=xlToLeft
+ 
+   Else
+ 
+       If PNs > 3 Then
+           PNs = PNs + 1
+ 
+           Dim ColumnNumber As Long
+           Dim ColumnLetter As String
+ 
+           ColumnLetter = Split(Cells(1, CInt(PNs)).Address, "$")(1)
+           Selection.AutoFill Destination:=Range("D:" + ColumnLetter), Type:=xlFillDefault
+       End If
+   End If
+  
+   
+   Range("A1").Select
+   ActiveWindow.ScrollRow = 1
+   ActiveWindow.ScrollColumn = 1
+  
+   ThisWorkbook.Close SaveChanges:=False
+  
+   Application.ScreenUpdating = True
+      
+      
+End Sub
+ 
